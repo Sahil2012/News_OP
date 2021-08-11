@@ -2,7 +2,6 @@ package com.example.newsop;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,16 +20,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static androidx.recyclerview.widget.RecyclerView.*;
-
 public class MainActivity extends AppCompatActivity implements NewsAct {
 
     private NewsAdapter mna;
+    String url = "https://saurav.tech/NewsAPI/top-headlines/category/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String st = getIntent().getStringExtra("str");
+        url = url + st + "/in.json";
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
 
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NewsAct {
 
     void getData() {
 
-    String url = "https://saurav.tech/NewsAPI/top-headlines/category/health/in.json";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
